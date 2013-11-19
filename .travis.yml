@@ -1,0 +1,9 @@
+language: objective-c
+compiler:
+  - gcc
+  - clang
+before_install:
+  - brew install binutils
+  - brew install https://gist.github.com/zlandau/7550479/raw/b084adb5506b186b520783bd69f92996cf2dada8/libdwarf.rb
+  - echo "DWARFLDFLAGS += -L$(dirname $(brew list binutils| grep libiberty.a))" >> config.mk.local
+script: make
