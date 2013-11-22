@@ -1,5 +1,8 @@
-language: c
+language: objective-c
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq binutils-dev libdwarf-dev
-script: make
+  - brew install binutils
+  - brew install https://gist.github.com/zlandau/7550479/raw/f72753f6a59f6a3fadf9a2e2952a9f6846c15a8d/libdwarf.rb
+  - echo "LDFLAGS += -L$(dirname $(brew list binutils| grep libiberty.a))" >> config.mk.local
+script:
+  - make
+  - ./atosl --version
